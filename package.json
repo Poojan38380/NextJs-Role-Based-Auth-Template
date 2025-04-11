@@ -4,6 +4,7 @@
   "private": true,
   "author": "poojan38380",
   "scripts": {
+    "postinstall": "prisma generate",
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
