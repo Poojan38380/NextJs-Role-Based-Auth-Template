@@ -1,18 +1,28 @@
 import bcrypt from "bcryptjs";
-import NextAuth from "next-auth";
+import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { JWT } from "next-auth/jwt";
 import prisma from "./prisma";
 
-export interface CustomUser {
-  id: string;
-  username: string;
-  profilePic: string;
-  email: string;
-  user_role: string;
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      username: string;
+      profilePic: string;
+      email: string;
+    };
+  }
+
+  interface User {
+    id: string;
+    username: string;
+    profilePic: string;
+    email: string;
+    user_role?: string;
+  }
 }
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -52,8 +62,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
-    // @ts-expect-error: TypeScript may not correctly infer the shape of the `token` and `user` objects in NextAuth's `jwt` callback.
-    async jwt({ token, user }: { token: JWT; user?: CustomUser }) {
+    async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
         token.username = user.username;
@@ -62,8 +71,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       return token;
     },
-    // @ts-expect-error: TypeScript might not infer the structure of `session.user` as expected in the `session` callback.
-    async session({ session, token }: { session: Session; token: JWT }) {
+    async session({ session, token }) {
       session.user.id = token.id as string;
       session.user.username = token.username as string;
       session.user.profilePic = token.profilePic as string;
@@ -71,8 +79,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return session;
     },
   },
-
   pages: {
     signIn: "/login",
   },
-});
+};
