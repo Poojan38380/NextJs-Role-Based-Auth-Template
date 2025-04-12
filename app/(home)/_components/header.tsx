@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ThemeToggleButton } from "@/components/theme/ThemeSelectorButton";
 import { signOut, useSession } from "next-auth/react";
-import { RainbowButton } from "@/components/magicui/rainbow-button";
+import { ShimmerButton } from "@/components/magicui/shimmer-button";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -50,9 +50,9 @@ const Header = () => {
     >
       <div className=" w-full px-4 py-3">
         <div className="flex justify-between items-center">
-          <div className="flex items-baseline gap-4">
+          <div className="flex items-baseline gap-1">
             {/* Mobile Menu Toggle */}
-            <div className="md:hidden flex items-center space-x-4">
+            <div className="md:hidden flex items-center space-x-2">
               <Button
                 variant="ghost"
                 size="icon"
@@ -66,7 +66,7 @@ const Header = () => {
               href="/"
               className="text-2xl font-bold text-primary hover:opacity-80 transition-opacity"
             >
-              InvManager
+              Instaposter
             </Link>
 
             {/* Desktop Navigation */}
@@ -93,17 +93,16 @@ const Header = () => {
             )}
           </div>
           {/* Desktop Right Section */}
-          <div className="flex items-center space-x-4">
-            <ThemeToggleButton />
+          <div className="flex items-center space-x-2 ml-2">
             {status === "authenticated" ? (
-              <>
-                <RainbowButton>Rainbow Button</RainbowButton>
-              </>
+              <ShimmerButton>Dashboard</ShimmerButton>
             ) : (
-              <>
-                <RainbowButton>Login</RainbowButton>
-              </>
+              <div className="flex items-center space-x-4">
+                <ShimmerButton className="px-4 py-2 ">Login</ShimmerButton>
+              </div>
             )}
+
+            <ThemeToggleButton />
           </div>
         </div>
       </div>
