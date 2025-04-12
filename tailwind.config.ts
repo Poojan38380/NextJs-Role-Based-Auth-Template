@@ -33,6 +33,15 @@ const config: Config = {
         "shimmer-slide": "shimmer-slide 3s ease-in-out infinite alternate",
         "spin-around": "spin-around 6s infinite linear",
       },
+
+      screens: {
+        ...Object.fromEntries(
+          [2560, 1440, 1024, 768, 425, 375, 320].map((bp) => [
+            `max-${bp}`,
+            { max: `${bp}px` },
+          ])
+        ),
+      },
     },
   },
   plugins: [],

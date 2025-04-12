@@ -3,12 +3,18 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { JWT } from "next-auth/jwt";
 import prisma from "./prisma";
+import { Role, Status } from "@prisma/client";
 
 export interface CustomUser {
   id: string;
+  firstName: string;
+  lastName: string;
   username: string;
   profilePic: string;
   email: string;
+  user_role: Role;
+  status: Status;
+  telegramNumber: string;
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -35,9 +41,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           throw new Error("User not found");
         }
 
-        const isPasswordValid = await bcrypt.compare(password, user.password);
+        try {
+          const isPasswordValid = await bcrypt.compare(password, user.password);
 
-        if (!isPasswordValid) {
+          if (!isPasswordValid) {
+            throw new Error("Invalid password");
+          }
+        } catch (error) {
+          console.error("Password validation error:", error);
           throw new Error("Invalid password");
         }
 
@@ -46,6 +57,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           username: user.username,
           profilePic: user.profilePic,
           email: user.email,
+          user_role: user.user_role,
+          status: user.account_status,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          telegramNumber: user.telegramNumber,
         };
       },
     }),
@@ -58,6 +74,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.username = user.username;
         token.profilePic = user.profilePic;
         token.email = user.email;
+        token.user_role = user.user_role;
+        token.status = user.status;
+        token.firstName = user.firstName;
+        token.lastName = user.lastName;
+        token.telegramNumber = user.telegramNumber;
       }
       return token;
     },
@@ -67,6 +88,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       session.user.username = token.username as string;
       session.user.profilePic = token.profilePic as string;
       session.user.email = token.email as string;
+      session.user.user_role = token.user_role as Role;
+      session.user.status = token.status as Status;
+      session.user.firstName = token.firstName as string;
+      session.user.lastName = token.lastName as string;
+      session.user.telegramNumber = token.telegramNumber as string;
       return session;
     },
   },

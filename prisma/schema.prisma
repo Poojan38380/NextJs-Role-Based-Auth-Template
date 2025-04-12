@@ -17,8 +17,8 @@ model User {
   firstName String
   lastName  String
 
-  user_role Role
-  status    Status
+  user_role      Role
+  account_status Status
 
   email          String
   telegramNumber String

@@ -81,19 +81,11 @@ const Header = () => {
                     {item.name}
                   </Link>
                 ))}
-                {status === "authenticated" && (
-                  <Link
-                    href={"/admin"}
-                    className="text-sm font-medium text-foreground hover:text-primary transition-colors"
-                  >
-                    Dashboard
-                  </Link>
-                )}
               </nav>
             )}
           </div>
           {/* Desktop Right Section */}
-          <div className="flex items-center space-x-2 ml-2">
+          <div className="flex items-center space-x-2 ml-2 max-725:hidden ">
             {status === "authenticated" ? (
               <Link href="/dashboard">
                 <ShimmerButton className="px-4 py-1 ">Dashboard</ShimmerButton>
@@ -127,13 +119,6 @@ const Header = () => {
             ))}
             {status === "authenticated" && (
               <>
-                <Link
-                  href="/admin"
-                  className="px-4 py-2 text-sm font-medium hover:bg-accent transition-colors"
-                  onClick={toggleMenu}
-                >
-                  Dashboard
-                </Link>
                 <Button
                   variant="ghost"
                   size="sm"

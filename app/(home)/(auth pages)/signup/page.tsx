@@ -86,7 +86,7 @@ const SignUpPage = () => {
               Sign up to become an account manager
             </CardDescription>
           </CardHeader>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit}>
             <CardContent className="p-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="grid gap-2">
@@ -96,6 +96,7 @@ const SignUpPage = () => {
                     name="firstName"
                     type="text"
                     required
+                    autoComplete="given-name"
                     placeholder="John"
                   />
                 </div>
@@ -106,6 +107,7 @@ const SignUpPage = () => {
                     name="lastName"
                     type="text"
                     required
+                    autoComplete="family-name"
                     placeholder="Doe"
                   />
                 </div>
@@ -131,6 +133,7 @@ const SignUpPage = () => {
                     type="text"
                     required
                     placeholder="1234567890"
+                    autoComplete="tel"
                   />
                 </div>
 
@@ -142,6 +145,7 @@ const SignUpPage = () => {
                     type="text"
                     required
                     placeholder="johndoe"
+                    autoComplete="username"
                   />
                 </div>
 
@@ -154,6 +158,7 @@ const SignUpPage = () => {
                       type={showPassword ? "text" : "password"}
                       required
                       placeholder="••••••••"
+                      autoComplete="new-password"
                     />
                     <Button
                       type="button"

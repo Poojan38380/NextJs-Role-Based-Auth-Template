@@ -43,7 +43,7 @@ export async function addUser({
         firstName,
         lastName,
         user_role: "ACCOUNT_MANAGER",
-        status: "PENDING",
+        account_status: "PENDING",
         email,
         telegramNumber,
       },
