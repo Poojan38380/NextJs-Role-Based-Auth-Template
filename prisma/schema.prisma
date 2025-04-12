@@ -11,9 +11,14 @@ model User {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
 
-  username  String @unique
-  password  String
+  username String @unique
+  password String
+
+  firstName String
+  lastName  String
+
   user_role Role
+  status    Status
 
   email          String
   telegramNumber String
@@ -24,4 +29,10 @@ model User {
 enum Role {
   ADMIN
   ACCOUNT_MANAGER
+}
+
+enum Status {
+  PENDING
+  ACTIVE
+  BANNED
 }

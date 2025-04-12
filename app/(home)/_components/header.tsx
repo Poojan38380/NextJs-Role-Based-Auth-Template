@@ -48,7 +48,7 @@ const Header = () => {
         isScrolled ? "bg-card/80 backdrop-blur-md shadow-md" : "bg-transparent"
       }`}
     >
-      <div className=" w-full px-4 py-3">
+      <div className=" w-full px-2 py-3">
         <div className="flex justify-between items-center">
           <div className="flex items-baseline gap-1">
             {/* Mobile Menu Toggle */}
@@ -95,10 +95,14 @@ const Header = () => {
           {/* Desktop Right Section */}
           <div className="flex items-center space-x-2 ml-2">
             {status === "authenticated" ? (
-              <ShimmerButton>Dashboard</ShimmerButton>
+              <Link href="/dashboard">
+                <ShimmerButton className="px-4 py-1 ">Dashboard</ShimmerButton>
+              </Link>
             ) : (
               <div className="flex items-center space-x-4">
-                <ShimmerButton className="px-4 py-2 ">Login</ShimmerButton>
+                <Link href="/login">
+                  <ShimmerButton className="px-4 py-1 ">Login</ShimmerButton>
+                </Link>
               </div>
             )}
 
