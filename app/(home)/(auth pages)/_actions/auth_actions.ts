@@ -72,7 +72,7 @@ Username: ${CreatedUser.username}
     }
     return {
       success: false,
-      error: `Failed to create user. Try contacting the admin.`,
+      error: `Failed to create user : ${error}`,
     };
   }
 }

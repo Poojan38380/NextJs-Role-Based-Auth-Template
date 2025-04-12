@@ -50,6 +50,7 @@ const SignUpPage = () => {
         email,
         telegramNumber,
       });
+
       if (result.success) {
         toast.success("User added successfully", {
           id: loadingToast,
@@ -69,21 +70,18 @@ const SignUpPage = () => {
       });
     } finally {
       setLoading(false);
-      toast.dismiss(loadingToast);
     }
   };
 
   return (
     <div className="flex min-h-screen items-center justify-center ">
-      <Card className="w-full max-w-md shadow-none border-none">
+      <Card className="w-full max-w-md shadow-none border-none bg-transparent mx-2">
         <MagicCard
           gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
           className="p-0"
         >
           <CardHeader className="border-b border-border p-4 [.border-b]:pb-4">
-            <CardTitle className="text-2xl font-bold">
-              Create an Account
-            </CardTitle>
+            <CardTitle>Create an Account</CardTitle>
             <CardDescription>
               Sign up to become an account manager
             </CardDescription>
@@ -91,10 +89,8 @@ const SignUpPage = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <CardContent className="p-4">
               <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor="firstName" className="text-sm font-medium">
-                    First Name
-                  </Label>
+                <div className="grid gap-2">
+                  <Label htmlFor="firstName">First Name</Label>
                   <Input
                     id="firstName"
                     name="firstName"
@@ -103,10 +99,8 @@ const SignUpPage = () => {
                     placeholder="John"
                   />
                 </div>
-                <div>
-                  <Label htmlFor="lastName" className="text-sm font-medium">
-                    Last Name
-                  </Label>
+                <div className="grid gap-2">
+                  <Label htmlFor="lastName">Last Name</Label>
                   <Input
                     id="lastName"
                     name="lastName"
@@ -117,11 +111,9 @@ const SignUpPage = () => {
                 </div>
               </div>
 
-              <div className="grid gap-3 pt-3">
-                <div>
-                  <Label htmlFor="email" className="text-sm font-medium">
-                    Email
-                  </Label>
+              <div className="grid gap-4 pt-4">
+                <div className="grid gap-2">
+                  <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
                     name="email"
@@ -131,26 +123,19 @@ const SignUpPage = () => {
                   />
                 </div>
 
-                <div>
-                  <Label
-                    htmlFor="telegramNumber"
-                    className="text-sm font-medium"
-                  >
-                    Telegram Number
-                  </Label>
+                <div className="grid gap-2 ">
+                  <Label htmlFor="telegramNumber">Telegram Number</Label>
                   <Input
                     id="telegramNumber"
                     name="telegramNumber"
                     type="text"
                     required
-                    placeholder="+1234567890"
+                    placeholder="1234567890"
                   />
                 </div>
 
-                <div>
-                  <Label htmlFor="username" className="text-sm font-medium">
-                    Username
-                  </Label>
+                <div className="grid gap-2 ">
+                  <Label htmlFor="username">Username</Label>
                   <Input
                     id="username"
                     name="username"
@@ -160,10 +145,8 @@ const SignUpPage = () => {
                   />
                 </div>
 
-                <div>
-                  <Label htmlFor="password" className="text-sm font-medium">
-                    Password
-                  </Label>
+                <div className="grid gap-2">
+                  <Label htmlFor="password">Password</Label>
                   <div className="relative">
                     <Input
                       id="password"
@@ -189,20 +172,20 @@ const SignUpPage = () => {
                 </div>
               </div>
             </CardContent>
-            <CardFooter className="flex flex-col  justify-center">
+            <CardFooter className="flex flex-col  justify-center p-4 border-t border-border [.border-t]:pt-4 gap-3  ">
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-indigo-600 hover:bg-indigo-700"
+                className="w-full  cursor-pointer"
               >
                 {loading ? "Creating Account..." : "Create Account"}
               </Button>
 
-              <p className="text-sm py-3 text-gray-500">
+              <p className="text-sm text-gray-500">
                 Already have an account?{" "}
                 <a
                   href="/login"
-                  className="text-indigo-600 hover:text-indigo-800 font-medium"
+                  className="text-primary hover:text-primary/80 font-medium"
                 >
                   Sign in
                 </a>

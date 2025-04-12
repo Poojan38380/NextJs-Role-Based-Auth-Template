@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme/theme-provider";
 import "./globals.css";
 
 import { SessionProvider } from "next-auth/react";
+import { Toaster } from "sonner";
 
 const APP_NAME = "Instaposter";
 const APP_DEFAULT_TITLE = "Instaposter";
@@ -70,6 +71,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <Toaster />
           </ThemeProvider>
         </SessionProvider>
       </body>
