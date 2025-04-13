@@ -6,8 +6,6 @@ import { DataTableColumnHeader } from "@/components/ui/data-table/data-table-col
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   User as UserIcon,
-  Mail,
-  Phone,
   Calendar,
   CheckCircle,
   XCircle,
@@ -17,6 +15,7 @@ import { formatDateYYMMDDHHMM } from "@/lib/format-date";
 import { Badge } from "@/components/ui/badge";
 
 import AllUserActions from "./AllUserActions";
+import ContactInfoCell from "./ContactInfoCell";
 
 export const AllUsersColumns: ColumnDef<User>[] = [
   {
@@ -124,22 +123,9 @@ export const AllUsersColumns: ColumnDef<User>[] = [
     header: "Contact",
     id: "contact",
     cell: ({ row }) => {
-      return (
-        <div className="flex flex-col gap-1">
-          <div className="flex items-center gap-1 text-sm">
-            <Mail className="h-3.5 w-3.5 text-muted-foreground" />
-            <span className="text-muted-foreground">{row.original.email}</span>
-          </div>
-          {row.original.telegramNumber && (
-            <div className="flex items-center gap-1 text-sm">
-              <Phone className="h-3.5 w-3.5 text-muted-foreground" />
-              <span className="text-muted-foreground">
-                {row.original.telegramNumber}
-              </span>
-            </div>
-          )}
-        </div>
-      );
+      const email: string = row.original.email;
+      const telegramNumber: string = row.original.telegramNumber;
+      return <ContactInfoCell email={email} telegramNumber={telegramNumber} />;
     },
   },
   {
