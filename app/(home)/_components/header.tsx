@@ -92,7 +92,7 @@ const Header = () => {
               </Link>
             ) : (
               <div className="flex items-center space-x-4">
-                <Link href="/login">
+                <Link href="/auth/login">
                   <ShimmerButton className="px-4 py-1 ">Login</ShimmerButton>
                 </Link>
               </div>

@@ -31,9 +31,9 @@ const formSchema = z.object({
 });
 
 const LoginPage = () => {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
   const { theme } = useTheme();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -159,7 +159,7 @@ const LoginPage = () => {
               <p className="text-sm text-gray-500">
                 Do not have an account?{" "}
                 <a
-                  href="/signup"
+                  href="/auth/signup"
                   className="text-primary hover:text-primary/80 font-medium"
                 >
                   Sign up
