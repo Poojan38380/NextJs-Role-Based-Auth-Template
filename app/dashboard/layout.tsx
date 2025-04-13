@@ -1,4 +1,6 @@
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import DashHeader from "./_components/dash-header";
+import { AppSidebar } from "./_components/sidebar/admin-sidebar";
 
 export default function AdminLayout({
   children,
@@ -6,9 +8,12 @@ export default function AdminLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <DashHeader></DashHeader>
-      {children}
-    </>
+    <SidebarProvider>
+      <AppSidebar />
+      <SidebarInset className="overflow-x-auto   ">
+        <DashHeader></DashHeader>
+        {children}
+      </SidebarInset>
+    </SidebarProvider>
   );
 }
