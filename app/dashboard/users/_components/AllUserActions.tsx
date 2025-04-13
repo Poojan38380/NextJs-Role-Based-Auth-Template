@@ -25,20 +25,30 @@ const AllUserActions = ({
   const isAdmin = session?.user?.user_role === "ADMIN";
 
   const handleActivate = async () => {
+    const loadingToast = toast.loading("Activating user...");
     const result = await approveUsers(userId, "ACTIVE");
     if (result.success) {
-      toast.success("User activated successfully");
+      toast.success("User activated successfully", {
+        id: loadingToast,
+      });
     } else {
-      toast.error("Failed to activate user");
+      toast.error("Failed to activate user", {
+        id: loadingToast,
+      });
     }
   };
 
   const handleDeactivate = async () => {
+    const loadingToast = toast.loading("Deactivating user...");
     const result = await approveUsers(userId, "INACTIVE");
     if (result.success) {
-      toast.success("User deactivated successfully");
+      toast.success("User deactivated successfully", {
+        id: loadingToast,
+      });
     } else {
-      toast.error("Failed to deactivate user");
+      toast.error("Failed to deactivate user", {
+        id: loadingToast,
+      });
     }
   };
 
@@ -72,8 +82,8 @@ const AllUserActions = ({
                 Activate
               </DropdownMenuItem>
             )}
-            <DropdownMenuSeparator />
-            {/* <DropdownMenuItem className="text-destructive">
+            {/*  <DropdownMenuSeparator />
+            <DropdownMenuItem className="text-destructive">
               Delete User
             </DropdownMenuItem> */}
           </>

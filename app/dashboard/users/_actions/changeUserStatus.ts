@@ -27,7 +27,7 @@ export async function approveUsers(userId: string, newStatus: Status) {
     ]);
 
     sendTelegramMessage(
-      `\n\n Status of User ${user.username} has been changed to ${newStatus} \n\n`
+      `\n\n Status of user : ${user.username} has been changed to : ${newStatus} \n\n`
     );
 
     return { success: true, userId: user.id };

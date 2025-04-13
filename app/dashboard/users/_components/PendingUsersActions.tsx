@@ -14,20 +14,30 @@ import { toast } from "sonner";
 
 const PendingUsersActions = ({ userId }: { userId: string }) => {
   const handleApprove = async () => {
+    const loadingToast = toast.loading("Approving user...");
     const result = await approveUsers(userId, "ACTIVE");
     if (result.success) {
-      toast.success("User approved successfully");
+      toast.success("User approved successfully", {
+        id: loadingToast,
+      });
     } else {
-      toast.error("Failed to approve user");
+      toast.error("Failed to approve user", {
+        id: loadingToast,
+      });
     }
   };
 
   const handleReject = async () => {
+    const loadingToast = toast.loading("Rejecting user...");
     const result = await approveUsers(userId, "INACTIVE");
     if (result.success) {
-      toast.success("User rejected successfully");
+      toast.success("User rejected successfully", {
+        id: loadingToast,
+      });
     } else {
-      toast.error("Failed to reject user");
+      toast.error("Failed to reject user", {
+        id: loadingToast,
+      });
     }
   };
   return (
