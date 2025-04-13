@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/collapsible";
 import {
   SidebarGroup,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -27,10 +26,6 @@ export function PrimaryNav() {
 
   return (
     <SidebarGroup className="space-y-4 p-3">
-      <SidebarGroupLabel className="text-sm font-bold text-primary/80 uppercase tracking-wider px-3 pb-2  ">
-        INV MANAGER
-      </SidebarGroupLabel>
-
       <SidebarMenu className="space-y-2">
         {PrimaryNavItems.map((item) => {
           const isActiveGroup = item.items?.some(
