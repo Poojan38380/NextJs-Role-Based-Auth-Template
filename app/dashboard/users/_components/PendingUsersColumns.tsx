@@ -12,19 +12,11 @@ import {
   CheckCircle,
   XCircle,
   Clock,
-  MoreVertical,
 } from "lucide-react";
 import { formatDateYYMMDDHHMM } from "@/lib/format-date";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+
+import PendingUsersActions from "./PendingUsersActions";
 
 export const PendingUsersColumns: ColumnDef<User>[] = [
   {
@@ -116,45 +108,9 @@ export const PendingUsersColumns: ColumnDef<User>[] = [
 
   {
     id: "actions",
-    cell: () => {
-      return (
-        <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            className="h-8 text-success hover:text-success/80 hover:bg-success/10"
-          >
-            <CheckCircle className="h-4 w-4 mr-1" />
-            Approve
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            className="h-8 text-destructive hover:text-destructive/80 hover:bg-destructive/10"
-          >
-            <XCircle className="h-4 w-4 mr-1" />
-            Reject
-          </Button>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <MoreVertical className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-[160px]">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>View Profile</DropdownMenuItem>
-              <DropdownMenuItem>Edit User</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem className="text-destructive">
-                Delete User
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      );
+    cell: ({ row }) => {
+      const userId: string = row.original.id;
+      return <PendingUsersActions userId={userId} />;
     },
   },
   {

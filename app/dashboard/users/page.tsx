@@ -39,7 +39,7 @@ const AllUsersPage = async () => {
       </div>
 
       <div className="grid grid-cols-1 gap-6 ">
-        {isAdmin && (
+        {isAdmin && pendingUsers.length > 0 && (
           <Card>
             <CardHeader className="pb-3">
               <div className="flex items-center gap-2">

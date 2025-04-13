@@ -35,5 +35,5 @@ enum Role {
 enum Status {
   PENDING
   ACTIVE
-  BANNED
+  INACTIVE
 }
