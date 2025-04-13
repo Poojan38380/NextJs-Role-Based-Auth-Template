@@ -14,9 +14,7 @@ export default function AuthLayout({
 
   useEffect(() => {
     if (session) {
-      toast.info("You are already logged in.", {
-        description: "Redirecting to dashboard...",
-      });
+      toast.info("Redirecting to dashboard...");
       router.push("/dashboard");
     }
   }, [session, router]);

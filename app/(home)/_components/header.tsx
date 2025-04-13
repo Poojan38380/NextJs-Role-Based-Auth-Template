@@ -87,9 +87,21 @@ const Header = () => {
           {/* Desktop Right Section */}
           <div className="flex items-center space-x-2 ml-2 max-725:hidden ">
             {status === "authenticated" ? (
-              <Link href="/dashboard">
-                <ShimmerButton className="px-4 py-1 ">Dashboard</ShimmerButton>
-              </Link>
+              <section className="flex items-center space-x-2">
+                <Link href="/dashboard">
+                  <ShimmerButton className="px-4 py-1 ">
+                    Dashboard
+                  </ShimmerButton>
+                </Link>
+                <Button
+                  title="Logout"
+                  variant="destructive"
+                  size="sm"
+                  onClick={() => signOut()}
+                >
+                  <LogOut size={16} />
+                </Button>
+              </section>
             ) : (
               <div className="flex items-center space-x-4">
                 <Link href="/auth/login">
