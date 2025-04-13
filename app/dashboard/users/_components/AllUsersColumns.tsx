@@ -12,19 +12,11 @@ import {
   CheckCircle,
   XCircle,
   Clock,
-  MoreVertical,
 } from "lucide-react";
 import { formatDateYYMMDDHHMM } from "@/lib/format-date";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+
+import AllUserActions from "./AllUserActions";
 
 export const AllUsersColumns: ColumnDef<User>[] = [
   {
@@ -121,37 +113,10 @@ export const AllUsersColumns: ColumnDef<User>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const user = row.original;
+      const userId = row.original.id;
+      const account_status = row.original.account_status;
 
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreVertical className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-[160px]">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View Profile</DropdownMenuItem>
-            <DropdownMenuItem>Edit User</DropdownMenuItem>
-            {user.account_status === "ACTIVE" ? (
-              <DropdownMenuItem className="text-destructive">
-                Deactivate
-              </DropdownMenuItem>
-            ) : (
-              <DropdownMenuItem className="text-green-600">
-                Activate
-              </DropdownMenuItem>
-            )}
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-destructive">
-              Delete User
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
+      return <AllUserActions userId={userId} account_status={account_status} />;
     },
   },
 
