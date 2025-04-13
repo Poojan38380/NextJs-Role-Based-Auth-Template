@@ -2,6 +2,7 @@
 
 import prisma from "@/lib/prisma";
 import { sendTelegramMessage } from "@/lib/send-telegram-message";
+import cacheRevalidate from "@/utils/cache-revalidation-helper";
 import bcrypt from "bcryptjs";
 
 export async function addUser({
@@ -58,12 +59,12 @@ Username: ${CreatedUser.username}
 
     await sendTelegramMessage(newNotification);
 
-    // await Promise.all([
-    //   cacheRevalidate({
-    //     routesToRevalidate: ["/admin/users"],
-    //     tagsToRevalidate: ["get-all-users"],
-    //   }),
-    // ]);
+    await Promise.all([
+      cacheRevalidate({
+        routesToRevalidate: ["/dashboard/users"],
+        tagsToRevalidate: ["get-all-users-for-table", "get-pending-users"],
+      }),
+    ]);
 
     return { success: true, userId: CreatedUser.id };
   } catch (error) {

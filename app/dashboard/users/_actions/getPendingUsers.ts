@@ -18,8 +18,11 @@ export type User = {
   updatedAt: Date;
 };
 
-async function getAllUsers() {
+async function getPendingUsers() {
   const users = await prisma.user.findMany({
+    where: {
+      account_status: "PENDING",
+    },
     select: {
       id: true,
       username: true,
@@ -40,7 +43,7 @@ async function getAllUsers() {
   return users;
 }
 
-export const getCachedUsersforTable = cache(
-  async () => getAllUsers(),
-  ["get-all-users-for-table"]
+export const getCachedPendingUsers = cache(
+  async () => getPendingUsers(),
+  ["get-pending-users"]
 );

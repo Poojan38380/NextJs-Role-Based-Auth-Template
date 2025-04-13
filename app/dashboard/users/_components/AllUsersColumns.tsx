@@ -5,8 +5,10 @@ import { User } from "../_actions/getAllUsers";
 import { DataTableColumnHeader } from "@/components/ui/data-table/data-table-column-header";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { User as UserIcon } from "lucide-react";
+import { formatDateYYMMDDHHMM } from "@/lib/format-date";
+import { Badge } from "@/components/ui/badge";
 
-export const columns: ColumnDef<User>[] = [
+export const AllUsersColumns: ColumnDef<User>[] = [
   {
     accessorKey: "username",
     header: ({ column }) => (
@@ -49,6 +51,41 @@ export const columns: ColumnDef<User>[] = [
   },
 
   {
+    header: "Account Status",
+    accessorKey: "account_status",
+
+    cell: ({ row }) => {
+      const accountStatus: string = row.getValue("account_status");
+
+      const getBadgeVariant = (accountStatus: string) => {
+        if (accountStatus === "ACTIVE") return "success";
+        if (accountStatus === "INACTIVE") return "destructive";
+        if (accountStatus === "PENDING") return "warning";
+        return "default";
+      };
+
+      return (
+        <Badge variant={getBadgeVariant(accountStatus)}>{accountStatus}</Badge>
+      );
+    },
+  },
+
+  {
+    header: "User Role",
+    accessorKey: "user_role",
+    cell: ({ row }) => {
+      const userRole: string = row.getValue("user_role");
+
+      const getBadgeVariant = (userRole: string) => {
+        if (userRole === "ADMIN") return "default";
+        if (userRole === "ACCOUNT_MANAGER") return "outline";
+        return "outline";
+      };
+
+      return <Badge variant={getBadgeVariant(userRole)}>{userRole}</Badge>;
+    },
+  },
+  {
     header: "Email",
     accessorKey: "email",
   },
@@ -56,16 +93,17 @@ export const columns: ColumnDef<User>[] = [
     header: "Telegram Number",
     accessorKey: "telegramNumber",
   },
-  {
-    header: "Account Status",
-    accessorKey: "account_status",
-  },
-  {
-    header: "User Role",
-    accessorKey: "user_role",
-  },
+
   {
     header: "Created At",
     accessorKey: "createdAt",
+    cell: ({ row }) => {
+      const createdAt: Date = row.getValue("createdAt");
+      return (
+        <span className="text-muted-foreground">
+          {formatDateYYMMDDHHMM(createdAt)}
+        </span>
+      );
+    },
   },
 ];
