@@ -21,7 +21,7 @@ export async function approveUsers(userId: string, newStatus: Status) {
 
     await Promise.all([
       cacheRevalidate({
-        routesToRevalidate: ["/dashboard/users"],
+        routesToRevalidate: ["/dashboard/users", "/dashboard/accounts"],
         tagsToRevalidate: ["get-all-users-for-table", "get-pending-users"],
       }),
     ]);
