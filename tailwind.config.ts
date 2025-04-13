@@ -35,12 +35,13 @@ const config: Config = {
       },
 
       screens: {
-        ...Object.fromEntries(
-          [2560, 1440, 1024, 768, 425, 375, 320].map((bp) => [
-            `max-${bp}`,
-            { max: `${bp}px` },
-          ])
-        ),
+        "max-2560": { max: "2560px" },
+        "max-1440": { max: "1440px" },
+        "max-1024": { max: "1024px" },
+        "max-768": { max: "768px" },
+        "max-425": { max: "425px" },
+        "max-375": { max: "375px" },
+        "max-320": { max: "320px" },
       },
     },
   },

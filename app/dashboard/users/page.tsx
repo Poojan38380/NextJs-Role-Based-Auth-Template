@@ -5,12 +5,7 @@ import { AllUsersColumns } from "./_components/AllUsersColumns";
 import { auth } from "@/lib/auth";
 import { PendingUsersColumns } from "./_components/PendingUsersColumns";
 import { getCachedPendingUsers } from "./_actions/getPendingUsers";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import BackButton from "../_components/sidebar/back-button";
 
 const AllUsersPage = async () => {
@@ -24,8 +19,8 @@ const AllUsersPage = async () => {
       <CardHeader>
         <BackButton title="Users" />
       </CardHeader>
-      <CardContent className="max-768:px-0">
-        {session?.user?.user_role === "ADMIN" && (
+      <CardContent className="px-0 md:px-6">
+        {session?.user?.user_role === "ADMIN" && pendingUsers.length > 0 && (
           <div className="mb-4 flex flex-col gap-4">
             <h2 className="text-lg font-semibold">Pending Users</h2>
             <DataTable columns={PendingUsersColumns} data={pendingUsers} />
@@ -36,7 +31,6 @@ const AllUsersPage = async () => {
           <DataTable columns={AllUsersColumns} data={users} />
         </div>
       </CardContent>
-      <CardFooter></CardFooter>
     </Card>
   );
 };
