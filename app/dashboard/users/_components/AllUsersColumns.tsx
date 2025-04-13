@@ -52,9 +52,7 @@ export const AllUsersColumns: ColumnDef<User>[] = [
   },
   {
     accessorKey: "name",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Name" />
-    ),
+    header: "Name",
     cell: ({ row }) => {
       const firstName: string = row.original.firstName;
       const lastName: string = row.original.lastName;
@@ -67,8 +65,10 @@ export const AllUsersColumns: ColumnDef<User>[] = [
     },
   },
   {
-    header: "Account Status",
     accessorKey: "account_status",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Account Status" />
+    ),
     cell: ({ row }) => {
       const accountStatus: string = row.getValue("account_status");
 
@@ -101,7 +101,9 @@ export const AllUsersColumns: ColumnDef<User>[] = [
     },
   },
   {
-    header: "User Role",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="User Role" />
+    ),
     accessorKey: "user_role",
     cell: ({ row }) => {
       const userRole: string = row.getValue("user_role");
@@ -176,7 +178,9 @@ export const AllUsersColumns: ColumnDef<User>[] = [
     },
   },
   {
-    header: "Created At",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Created At" />
+    ),
     accessorKey: "createdAt",
     cell: ({ row }) => {
       const createdAt: Date = row.getValue("createdAt");

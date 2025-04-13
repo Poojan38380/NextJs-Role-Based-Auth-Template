@@ -52,9 +52,7 @@ export const PendingUsersColumns: ColumnDef<User>[] = [
   },
   {
     accessorKey: "name",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Name" />
-    ),
+    header: "Name",
     cell: ({ row }) => {
       const firstName: string = row.original.firstName;
       const lastName: string = row.original.lastName;
@@ -182,7 +180,9 @@ export const PendingUsersColumns: ColumnDef<User>[] = [
     },
   },
   {
-    header: "Created At",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Created At" />
+    ),
     accessorKey: "createdAt",
     cell: ({ row }) => {
       const createdAt: Date = row.getValue("createdAt");
